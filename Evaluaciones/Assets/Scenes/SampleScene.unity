@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 844610974}
   - component: {fileID: 844610973}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Decoracion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1801832388
 PrefabInstance:
@@ -320,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2258366104950612687, guid: a182f6921f1b8e74bae11a9c14f729a1, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2258366104950612687, guid: a182f6921f1b8e74bae11a9c14f729a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 2101154676}
   - component: {fileID: 2101154678}
   m_Layer: 6
-  m_Name: Square
+  m_Name: Plataforma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

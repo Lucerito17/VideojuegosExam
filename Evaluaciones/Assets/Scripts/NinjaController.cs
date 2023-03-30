@@ -66,7 +66,7 @@ private void Caminar()
 
     private void Ataque()
     {
-        if(Input.GetKey(KeyCode.X))
+        if(Input.GetKey(KeyCode.C))
             ChangeAnimation(ANIMATION_ATTACK);
     }
     
@@ -86,7 +86,7 @@ private void Caminar()
 
     private void Morir()
     {
-        if(Input.GetKey(KeyCode.K))
+        if(Input.GetKey(KeyCode.X))
         {
             estado = false;
             ChangeAnimation(ANIMATION_MORIR);
