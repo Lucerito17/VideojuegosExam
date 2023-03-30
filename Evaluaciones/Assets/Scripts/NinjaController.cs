@@ -13,11 +13,12 @@ public class NinjaController : MonoBehaviour
     const int ANIMATION_THROW = 2;
     const int ANIMATION_ATTACK = 3;
     const int ANIMATION_SLIDE = 4;
-    const int ANIMATION_GLIDE = 5;
-    const int ANIMATION_MORIR = 6;
+    const int ANIMATION_MORIR = 5;
 
     bool estado = true;
-    // Start is called before the first frame update
+    int velocity = 5;
+    int velocitySlide = 7;
+
     void Start()
     {
         Debug.Log("Iniciando juego");
@@ -26,7 +27,6 @@ public class NinjaController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(estado == true)
@@ -36,19 +36,18 @@ public class NinjaController : MonoBehaviour
             Throw();
             Ataque();
             Deslizar();
-            Glide();
         }
     }
 private void Caminar()
     {
         if(Input.GetKey(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(3, rb.velocity.y);
+            rb.velocity = new Vector2(velocity, rb.velocity.y);
             ChangeAnimation(ANIMATION_CORRER);
         }
         else if(Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(-3, rb.velocity.y);
+            rb.velocity = new Vector2(-velocity, rb.velocity.y);
             ChangeAnimation(ANIMATION_CORRER);
         }
         else 
@@ -75,20 +74,14 @@ private void Caminar()
     {
         if(Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
         {
-            rb.velocity = new Vector2(4, rb.velocity.y);
+            rb.velocity = new Vector2(velocitySlide, rb.velocity.y);
             ChangeAnimation(ANIMATION_SLIDE);
         }
         else if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.Z))
         {
-            rb.velocity = new Vector2(-4, rb.velocity.y);
+            rb.velocity = new Vector2(-velocitySlide, rb.velocity.y);
             ChangeAnimation(ANIMATION_SLIDE);
         }
-    }
-
-    private void Glide()
-    {
-        if(Input.GetKey(KeyCode.P))
-            ChangeAnimation(ANIMATION_GLIDE);
     }
 
     private void Morir()
