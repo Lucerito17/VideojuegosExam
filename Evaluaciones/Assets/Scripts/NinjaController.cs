@@ -19,7 +19,7 @@ public class NinjaController : MonoBehaviour
     bool estado = true;
     int velocity = 2;
     int velocitySlide = 2;
-    float VelocityJump = 4;
+    float VelocityJump = 5;
     int cont;
 
     void Start()
