@@ -17,9 +17,9 @@ public class NinjaController : MonoBehaviour
     const int ANIMATION_MORIR = 5;
 
     bool estado = true;
-    int velocity = 5;
-    int velocitySlide = 7;
-    float VelocityJump = 10;
+    int velocity = 2;
+    int velocitySlide = 2;
+    float VelocityJump = 4;
     int cont;
 
     void Start()
