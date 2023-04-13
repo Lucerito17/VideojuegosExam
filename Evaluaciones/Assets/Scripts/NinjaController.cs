@@ -20,7 +20,7 @@ public class NinjaController : MonoBehaviour
     bool aire = false;
     int velocity = 8;
     int velocitySlide = 2;
-    float VelocityJump = 9;
+    float VelocityJump = 10;
     int cont = 0;
 
     void Start()
@@ -42,11 +42,11 @@ public class NinjaController : MonoBehaviour
             Ataque();
             Deslizar();
             Saltar();
-            SaltarDoble();
+            //SaltarDoble();
             CheckGround();
         }
     }
-private void Caminar()
+    private void Caminar()
     {
         if(Input.GetKey(KeyCode.RightArrow))
         {
@@ -63,7 +63,6 @@ private void Caminar()
             rb.velocity = new Vector2(0, rb.velocity.y);
             ChangeAnimation(ANIMATION_QUIETO);
         }
-        Morir();
     }
 
     private void Throw()
@@ -94,12 +93,8 @@ private void Caminar()
 
     private void Morir()
     {
-        if(Input.GetKey(KeyCode.X))
-        {
-            estado = false;
-            ChangeAnimation(ANIMATION_MORIR);
-        }
-            
+        estado = false;
+        ChangeAnimation(ANIMATION_MORIR);  
     }
 
     private void Saltar()
@@ -127,14 +122,28 @@ private void Caminar()
             }
         }
     }
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Parar todo");
+            Morir();
+        }
+    } 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag=="Saltar")
+        /*if(other.gameObject.tag=="Saltar")
         {
             cont++;
             Debug.Log("SE FUE");
             Destroy(other.gameObject);
+        }*/
+
+        if(other.gameObject.tag == "salto1");
+        {
+            velocity = velocity + 3;
+            Debug.Log(velocity);
         }
     }
 

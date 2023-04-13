@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Saltar
+  - Enemy
+  - salto1
+  - salto2
+  - salto3
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Plataforma
-  - 
+  - Player
   - 
   - 
   - 
