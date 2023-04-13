@@ -17,10 +17,11 @@ public class NinjaController : MonoBehaviour
     const int ANIMATION_MORIR = 5;
 
     bool estado = true;
-    int velocity = 2;
+    bool aire = false;
+    int velocity = 8;
     int velocitySlide = 2;
-    float VelocityJump = 4;
-    int cont;
+    float VelocityJump = 9;
+    int cont = 0;
 
     void Start()
     {
@@ -41,6 +42,7 @@ public class NinjaController : MonoBehaviour
             Ataque();
             Deslizar();
             Saltar();
+            SaltarDoble();
             CheckGround();
         }
     }
@@ -104,11 +106,35 @@ private void Caminar()
     {
         animator.SetFloat("VelocityJump", rb.velocity.y);
         if(!cl.IsTouchingLayers(LayerMask.GetMask("Plataforma"))){ return;}
-        if (Input.GetKeyDown(KeyCode.Space)&& cont!=1)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, VelocityJump);
-            //cont++;
-            //Debug.Log(cont); //para ver si salta 2 veces
+        }
+    }
+
+    private void SaltarDoble()
+    {
+        if(aire)
+        {
+            Debug.Log(cont);
+            if(!cl.IsTouchingLayers(LayerMask.GetMask("Plataforma")))
+            {
+                if (Input.GetKeyDown(KeyCode.V)&&cont>0)
+                {   
+                    rb.velocity = new Vector2(rb.velocity.x, VelocityJump+4);
+                    cont--;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag=="Saltar")
+        {
+            cont++;
+            Debug.Log("SE FUE");
+            Destroy(other.gameObject);
         }
     }
 
@@ -116,12 +142,12 @@ private void Caminar()
     {
         if(cl.IsTouchingLayers(LayerMask.GetMask("Plataforma")))
         {
-            cont = 0;
             animator.SetBool("isGround", true);
         }
         else
         {
             animator.SetBool("isGround", false);
+            aire = true;
         }
     }
 
