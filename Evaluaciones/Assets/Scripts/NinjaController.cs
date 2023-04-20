@@ -15,6 +15,7 @@ public class NinjaController : MonoBehaviour
     const int ANIMATION_ATTACK = 3;
     const int ANIMATION_SLIDE = 4;
     const int ANIMATION_MORIR = 5;
+    public GameObject balita;
 
     bool estado = true;
     bool aire = false;
@@ -42,6 +43,7 @@ public class NinjaController : MonoBehaviour
             Ataque();
             Deslizar();
             Saltar();
+            Disparar();
             //SaltarDoble();
             CheckGround();
         }
@@ -75,6 +77,28 @@ public class NinjaController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.C))
             ChangeAnimation(ANIMATION_ATTACK);
+    }
+
+    private void Disparar()
+    {
+        if(Input.GetKeyUp(KeyCode.F))
+        {
+            if(sr.flipX==true){//disparar hacia la izquierda   
+                var BalasPosition = transform.position + new Vector3(-3,0,0);
+                var gb = Instantiate(balita, BalasPosition, Quaternion.identity) as GameObject;
+                //llamar bala, posicion bala , direcion bala
+                var controller = gb.GetComponent<Bala>();
+                controller.SetLeftDirection();
+            }
+
+            if(sr.flipX==false){//disparar hacia la derecha
+                var BalasPosition = transform.position + new Vector3(3,0,0);
+                var gb = Instantiate(balita, BalasPosition, Quaternion.identity) as GameObject;
+                //llamar bala, posicion bala , direcion bala
+                var controller = gb.GetComponent<Bala>();
+                controller.SetRightDirection();
+            }
+        }    
     }
     
     private void Deslizar()
@@ -133,12 +157,11 @@ public class NinjaController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        /*if(other.gameObject.tag=="Saltar")
+        if(other.gameObject.tag=="Enemy")
         {
-            cont++;
             Debug.Log("SE FUE");
             Destroy(other.gameObject);
-        }*/
+        }
 
         if(other.gameObject.tag == "salto1");
         {
