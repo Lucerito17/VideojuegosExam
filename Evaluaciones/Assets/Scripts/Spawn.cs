@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Time.deltaTime);
+        //Debug.Log(Time.deltaTime);
         cont += Time.deltaTime;
         if(cont > 3)
         {

@@ -9,6 +9,7 @@ TagManager:
   - salto1
   - salto2
   - salto3
+  - Coin
   layers:
   - Default
   - TransparentFX

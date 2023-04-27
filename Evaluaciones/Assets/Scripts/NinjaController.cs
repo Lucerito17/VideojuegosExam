@@ -16,6 +16,12 @@ public class NinjaController : MonoBehaviour
     const int ANIMATION_SLIDE = 4;
     const int ANIMATION_MORIR = 5;
     public GameObject balita;
+    public AudioClip jumpSound;
+    public AudioClip bulletSound;
+    public AudioClip coinSound;
+    public AudioClip deadSound;
+    GameManager gameManager;
+    AudioSource audioSource;
 
     bool estado = true;
     bool aire = false;
@@ -31,6 +37,8 @@ public class NinjaController : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         cl = GetComponent<Collider2D>();
+        gameManager = FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>(); 
     }
 
     void Update()
@@ -81,12 +89,15 @@ public class NinjaController : MonoBehaviour
 
     private void Disparar()
     {
-        if(Input.GetKeyUp(KeyCode.F))
+        if(gameManager.Balas() > 0)
         {
-            Bala(3,0,0);
-            
+            if(Input.GetKeyUp(KeyCode.F))
+            {
+                Bala(3,0,0);
+                gameManager.MenosBalas(1);
+                audioSource.PlayOneShot(bulletSound);
+            }
         }
-        
     }
 
     public void Bala(int posX, int posY, int posZ)
@@ -124,7 +135,8 @@ public class NinjaController : MonoBehaviour
     private void Morir()
     {
         estado = false;
-        ChangeAnimation(ANIMATION_MORIR);  
+        ChangeAnimation(ANIMATION_MORIR);
+        audioSource.PlayOneShot(deadSound);
     }
 
     private void Saltar()
@@ -134,6 +146,7 @@ public class NinjaController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, VelocityJump);
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
@@ -155,8 +168,13 @@ public class NinjaController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Parar todo");
-            Morir();
+            gameManager.RestaVida();
+            float tiempo = 0;
+            if(gameManager.Vidita() == 0)
+            {
+                Debug.Log("Parar todo");
+                Morir();
+            }
         }
     } 
 
@@ -168,10 +186,17 @@ public class NinjaController : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if(other.gameObject.tag == "salto1");
+        /*if(other.gameObject.tag == "salto1");
         {
             velocity = velocity + 3;
             Debug.Log(velocity);
+        }*/
+
+        if(other.gameObject.tag == "Coin");
+        {
+            Destroy(other.gameObject);
+            gameManager.SumaMonedas();
+            audioSource.PlayOneShot(coinSound);
         }
     }
 

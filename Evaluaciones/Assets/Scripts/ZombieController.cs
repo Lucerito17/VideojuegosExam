@@ -9,6 +9,7 @@ public class ZombieController : MonoBehaviour
     Animator animator;
     SpriteRenderer sr;
     bool estado = true;
+    GameManager gameManager;
     const int ANIMATION_QUIETO = 1;
     const int ANIMATION_CORRER = 0;
 
@@ -17,6 +18,7 @@ public class ZombieController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
 
@@ -43,6 +45,7 @@ public class ZombieController : MonoBehaviour
 
     private void Morir()
     {
+        Debug.Log("SE DETIENE");
         estado = false;
         rb.velocity = new Vector2(0, rb.velocity.y);
         ChangeAnimation(ANIMATION_QUIETO);
@@ -54,7 +57,7 @@ public class ZombieController : MonoBehaviour
         if(other.gameObject.name == "Player")
         {
             Debug.Log("Parar enemigo");
-            Morir();
+            //Morir();
         }
     } 
     private void ChangeAnimation(int animation)

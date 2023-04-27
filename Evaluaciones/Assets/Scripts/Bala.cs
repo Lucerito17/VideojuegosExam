@@ -8,6 +8,7 @@ public class Bala : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     float realVelocity;
+    GameManager gameManager;
     public GameObject balitas;
 
     public void SetRightDirection()
@@ -24,16 +25,21 @@ public class Bala : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
         Destroy(this.gameObject, 3);//eliminacion del objeto
     }
 
     void Update()
     {
         rb.velocity = new Vector2(realVelocity, 0); 
-        if(Input.GetKeyDown(KeyCode.G))
+        if(gameManager.Balas() > 0)
         {
-            CrearBalaDown();
-            CrearBalaUp();
+            if(Input.GetKeyDown(KeyCode.G))
+            {
+                CrearBalaDown();
+                CrearBalaUp();
+                gameManager.MenosBalas(2);
+            }
         }
     }
 
