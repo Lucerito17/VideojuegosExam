@@ -8,6 +8,7 @@ public class Bala : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     float realVelocity;
+    public GameObject balitas;
 
     public void SetRightDirection()
     {
@@ -23,33 +24,43 @@ public class Bala : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        Destroy(this.gameObject, 2);//eliminacion del objeto
+        Destroy(this.gameObject, 3);//eliminacion del objeto
     }
-
 
     void Update()
     {
         rb.velocity = new Vector2(realVelocity, 0); 
-        GirarAnimacion();
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            CrearBalaDown();
+            CrearBalaUp();
+        }
     }
 
-    private void GirarAnimacion()
+    void CrearBalaUp()
     {
-        if(rb.velocity.x < 0)
-        {
-            sr.flipX = true;
-        }
-        else if (rb.velocity.x > 0)
-        {
-            sr.flipX = false;
-        }
+        var BalasPosition = transform.position + new Vector3(0,2,0);
+        var gb = Instantiate(balitas, BalasPosition, Quaternion.identity) as GameObject;
+        
+        var controller = gb.GetComponent<Balas>();
+        controller.SetUpDirection(velocity);
+    }
+
+    void CrearBalaDown()
+    {
+        var BalasPosition = transform.position + new Vector3(0,-2,0);
+        var gb = Instantiate(balitas, BalasPosition, Quaternion.identity) as GameObject;
+        
+        var controller = gb.GetComponent<Balas>();
+        controller.SetDownDirection(velocity);
     }
 
     public void OnCollisionEnter2D(Collision2D other)//para chocar y eliminar
     {   
-        Destroy(this.gameObject);//se topa con el objeto 
+        
         if (other.gameObject.tag == "Enemy")
-        {
+        { 
+            Destroy(this.gameObject);//se topa con el objeto 
             Destroy(other.gameObject);//destruye al objeto topado
         }
     }

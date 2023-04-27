@@ -83,22 +83,28 @@ public class NinjaController : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.F))
         {
-            if(sr.flipX==true){//disparar hacia la izquierda   
-                var BalasPosition = transform.position + new Vector3(-3,0,0);
+            Bala(3,0,0);
+            
+        }
+        
+    }
+
+    public void Bala(int posX, int posY, int posZ)
+    {
+        if(sr.flipX==true){//disparar hacia la izquierda  
+                var BalasPosition = transform.position + new Vector3(-posX,posY,posZ);//negativo
                 var gb = Instantiate(balita, BalasPosition, Quaternion.identity) as GameObject;
                 //llamar bala, posicion bala , direcion bala
                 var controller = gb.GetComponent<Bala>();
                 controller.SetLeftDirection();
             }
-
-            if(sr.flipX==false){//disparar hacia la derecha
-                var BalasPosition = transform.position + new Vector3(3,0,0);
+        if(sr.flipX==false){//disparar hacia la derecha
+                var BalasPosition = transform.position + new Vector3(posX,posY,posZ);//positivo
                 var gb = Instantiate(balita, BalasPosition, Quaternion.identity) as GameObject;
                 //llamar bala, posicion bala , direcion bala
                 var controller = gb.GetComponent<Bala>();
                 controller.SetRightDirection();
             }
-        }    
     }
     
     private void Deslizar()
@@ -135,7 +141,6 @@ public class NinjaController : MonoBehaviour
     {
         if(aire)
         {
-            Debug.Log(cont);
             if(!cl.IsTouchingLayers(LayerMask.GetMask("Plataforma")))
             {
                 if (Input.GetKeyDown(KeyCode.V)&&cont>0)
