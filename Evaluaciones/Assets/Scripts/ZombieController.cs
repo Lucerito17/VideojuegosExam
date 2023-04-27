@@ -29,6 +29,8 @@ public class ZombieController : MonoBehaviour
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             GirarAnimacion();
         }
+        if(gameManager.Vidita() == 0)
+        Morir();
     }
 
     private void GirarAnimacion()
@@ -45,19 +47,19 @@ public class ZombieController : MonoBehaviour
 
     private void Morir()
     {
-        Debug.Log("SE DETIENE");
+        Debug.Log("SE DETIENE ZOMBIE");
         estado = false;
         rb.velocity = new Vector2(0, rb.velocity.y);
         ChangeAnimation(ANIMATION_QUIETO);
     }
 
-
      private void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.name == "Player")
-        {
-            Debug.Log("Parar enemigo");
-            //Morir();
+        if(other.gameObject.name == "Kunai"){
+            if(gameManager.vidas==0){
+                Destroy(this.gameObject);
+                Destroy(other.gameObject);
+            }
         }
     } 
     private void ChangeAnimation(int animation)

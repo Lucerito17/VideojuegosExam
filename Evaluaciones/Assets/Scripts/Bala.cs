@@ -47,7 +47,6 @@ public class Bala : MonoBehaviour
     {
         var BalasPosition = transform.position + new Vector3(0,2,0);
         var gb = Instantiate(balitas, BalasPosition, Quaternion.identity) as GameObject;
-        
         var controller = gb.GetComponent<Balas>();
         controller.SetUpDirection(velocity);
     }
@@ -56,7 +55,6 @@ public class Bala : MonoBehaviour
     {
         var BalasPosition = transform.position + new Vector3(0,-2,0);
         var gb = Instantiate(balitas, BalasPosition, Quaternion.identity) as GameObject;
-        
         var controller = gb.GetComponent<Balas>();
         controller.SetDownDirection(velocity);
     }
@@ -66,8 +64,18 @@ public class Bala : MonoBehaviour
         
         if (other.gameObject.tag == "Enemy")
         { 
-            Destroy(this.gameObject);//se topa con el objeto 
-            Destroy(other.gameObject);//destruye al objeto topado
+            //Destroy(this.gameObject);//se topa con el objeto 
+            //Destroy(other.gameObject);//destruye al objeto topado
+            
+            gameManager.RestaVidaZombie(1);
+            Debug.Log(gameManager.vidas);
+            Destroy(this.gameObject);
+            if(gameManager.vidas<=0){
+                Destroy(other.gameObject);
+                gameManager.CantZombie(1);
+                gameManager.vidas = 2;
+            }
+            
         }
     }
 }

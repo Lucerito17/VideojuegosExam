@@ -36,7 +36,6 @@ public class Balas : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)//para chocar y eliminar
     {   
-        
         if (other.gameObject.tag == "Enemy")
         { 
             Destroy(this.gameObject);//se topa con el objeto 

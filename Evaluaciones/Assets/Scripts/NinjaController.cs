@@ -169,10 +169,9 @@ public class NinjaController : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             gameManager.RestaVida();
-            float tiempo = 0;
             if(gameManager.Vidita() == 0)
             {
-                Debug.Log("Parar todo");
+                Debug.Log("Parar personaje");
                 Morir();
             }
         }
@@ -196,6 +195,12 @@ public class NinjaController : MonoBehaviour
         {
             Destroy(other.gameObject);
             gameManager.SumaMonedas();
+            audioSource.PlayOneShot(coinSound);
+        }
+        if(other.gameObject.tag == "mas");
+        {
+            Destroy(other.gameObject);
+            gameManager.MasBalas(5);
             audioSource.PlayOneShot(coinSound);
         }
     }
