@@ -24,12 +24,13 @@ public class ZombieController : MonoBehaviour
 
     void Update()
     {
-        if(estado == true)
+        if(gameManager.Vidita() > 0)
         {
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             GirarAnimacion();
         }
-        if(gameManager.Vidita() == 0)
+        //if(gameManager.Vidita() <= 0)
+        else
         Morir();
     }
 
@@ -56,7 +57,7 @@ public class ZombieController : MonoBehaviour
      private void OnCollisionEnter2D(Collision2D other) 
     {
         if(other.gameObject.name == "Kunai"){
-            if(gameManager.vidas==0){
+            if(gameManager.Vidas()==0){
                 Destroy(this.gameObject);
                 Destroy(other.gameObject);
             }

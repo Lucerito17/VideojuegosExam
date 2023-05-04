@@ -11,6 +11,7 @@ TagManager:
   - salto3
   - Coin
   - mas
+  - portal
   layers:
   - Default
   - TransparentFX

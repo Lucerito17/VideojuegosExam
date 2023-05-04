@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NinjaController : MonoBehaviour
 {
@@ -25,9 +26,9 @@ public class NinjaController : MonoBehaviour
 
     bool estado = true;
     bool aire = false;
-    int velocity = 8;
+    int velocity = 10;
     int velocitySlide = 2;
-    float VelocityJump = 10;
+    float VelocityJump = 15;
     int cont = 0;
 
     void Start()
@@ -43,19 +44,73 @@ public class NinjaController : MonoBehaviour
 
     void Update()
     {
-        if(estado == true)
+        if(gameManager.Vidita() > 0)
         {
-            Caminar();
-            GirarAnimacion();
-            Throw();
-            Ataque();
+            //Caminar();
+            //GirarAnimacion();
+            //Throw();
+            //Ataque();
             Deslizar();
             Saltar();
-            Disparar();
+            //Disparar();
             //SaltarDoble();
             CheckGround();
         }
+        else 
+        {
+            Morir();
+            Debug.Log("se murio");
+        }
     }
+
+    public void WalkToLeft()
+    {
+        if(gameManager.Vidita() > 0){
+        rb.velocity = new Vector2(-velocity, rb.velocity.y);
+        sr.flipX = true;
+        ChangeAnimation(ANIMATION_CORRER);
+        }
+    }
+
+    public void WalkToRight()
+    {
+        if(gameManager.Vidita() > 0){
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
+        sr.flipX = false;
+        ChangeAnimation(ANIMATION_CORRER);
+        }
+    }
+
+    public void StopWalk()
+    {
+        if(estado == true){
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        ChangeAnimation(ANIMATION_QUIETO);
+        }
+    }
+
+    public void Shoot()
+    {
+        if(gameManager.Vidita() > 0){
+        if(gameManager.Balas() > 0)
+        {
+            Bala(3,0,0);
+            gameManager.MenosBalas(1);
+            audioSource.PlayOneShot(bulletSound);
+        }
+        }
+    }
+
+    public void Jump()
+    {
+        if(gameManager.Vidita() > 0){
+        audioSource.PlayOneShot(jumpSound);
+        animator.SetFloat("VelocityJump", rb.velocity.y);
+        if(!cl.IsTouchingLayers(LayerMask.GetMask("Plataforma"))){return;}
+            rb.velocity = new Vector2(rb.velocity.x, VelocityJump);
+        }
+    }
+
     private void Caminar()
     {
         if(Input.GetKey(KeyCode.RightArrow))
@@ -136,7 +191,7 @@ public class NinjaController : MonoBehaviour
     {
         estado = false;
         ChangeAnimation(ANIMATION_MORIR);
-        audioSource.PlayOneShot(deadSound);
+        
     }
 
     private void Saltar()
@@ -168,12 +223,15 @@ public class NinjaController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            gameManager.RestaVida();
             if(gameManager.Vidita() == 0)
             {
                 Debug.Log("Parar personaje");
-                Morir();
             }
+            else{
+                gameManager.RestaVida();
+            }
+            if(gameManager.Vidita() == 0)
+                audioSource.PlayOneShot(deadSound);
         }
     } 
 
@@ -202,6 +260,11 @@ public class NinjaController : MonoBehaviour
             Destroy(other.gameObject);
             gameManager.MasBalas(5);
             audioSource.PlayOneShot(coinSound);
+        }
+
+        if(other.gameObject.name =="Portal")//cambiar escena
+        {
+            SceneManager.LoadScene(1);
         }
     }
 
