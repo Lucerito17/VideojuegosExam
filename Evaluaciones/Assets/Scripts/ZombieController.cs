@@ -29,7 +29,6 @@ public class ZombieController : MonoBehaviour
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             GirarAnimacion();
         }
-        //if(gameManager.Vidita() <= 0)
         else
         Morir();
     }

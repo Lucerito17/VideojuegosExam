@@ -12,6 +12,7 @@ TagManager:
   - Coin
   - mas
   - portal
+  - llave
   layers:
   - Default
   - TransparentFX

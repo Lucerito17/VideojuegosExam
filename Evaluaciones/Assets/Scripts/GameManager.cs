@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text VidaTxt ;
     public TMP_Text BalasTxt;
     public TMP_Text ZombieTxt;
+    public TMP_Text LlaveTxt;
     int cont;
     int vidita;
     int balas;
     int cant;
+    int llave;
     public int vidas;
     void Start()
     {
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         balas = 5;
         cant = 0;
         vidas = 2;
+        llave = 0;
         TextVista();
     }
 
@@ -44,6 +47,10 @@ public class GameManager : MonoBehaviour
     public int Vidas()
     {
         return vidas;
+    }
+    public int Llave()
+    {
+        return llave;
     }
 
     public void SumaMonedas()
@@ -80,11 +87,18 @@ public class GameManager : MonoBehaviour
     {
         vidas-=menos;
     }
+
+    public void SumaLlave()
+    {
+        llave++;
+        TextVista();
+    }
     public void TextVista()
     {
         MonedasTxt.text = "Monedas : " + cont;
         VidaTxt.text ="Vida : " + vidita;
         BalasTxt.text ="Balas : " + balas;
-        ZombieTxt.text="Zombies : " + cant;
+        ZombieTxt.text="Puntos : " + cant;
+        LlaveTxt.text="Llave: "+ llave;
     }
 }

@@ -16,7 +16,7 @@ public class Spawn : MonoBehaviour
     {
         //Debug.Log(Time.deltaTime);
         cont += Time.deltaTime;
-        if(cont > 3)
+        if(cont > 5)
         {
             GenerarZombie();
             cont = 0;

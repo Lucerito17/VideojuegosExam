@@ -23,13 +23,14 @@ public class NinjaController : MonoBehaviour
     public AudioClip deadSound;
     GameManager gameManager;
     AudioSource audioSource;
-
+    bool cambio = true;
     bool estado = true;
     bool aire = false;
     int velocity = 10;
     int velocitySlide = 2;
-    float VelocityJump = 15;
+    float VelocityJump = 11;
     int cont = 0;
+    bool portal = false;
 
     void Start()
     {
@@ -98,6 +99,13 @@ public class NinjaController : MonoBehaviour
             gameManager.MenosBalas(1);
             audioSource.PlayOneShot(bulletSound);
         }
+        }
+    }
+    public void Portal()
+    {
+        if(portal && gameManager.Llave()==1&&gameManager.Cantidad()==5)
+        {
+            SceneManager.LoadScene(4);
         }
     }
 
@@ -191,7 +199,6 @@ public class NinjaController : MonoBehaviour
     {
         estado = false;
         ChangeAnimation(ANIMATION_MORIR);
-        
     }
 
     private void Saltar()
@@ -233,6 +240,11 @@ public class NinjaController : MonoBehaviour
             if(gameManager.Vidita() == 0)
                 audioSource.PlayOneShot(deadSound);
         }
+
+        if(other.gameObject.name =="Portal")//cambiar escena
+        {
+            portal = true;
+        }
     } 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -261,11 +273,13 @@ public class NinjaController : MonoBehaviour
             gameManager.MasBalas(5);
             audioSource.PlayOneShot(coinSound);
         }
-
-        if(other.gameObject.name =="Portal")//cambiar escena
+        if(other.gameObject.tag =="llave")
         {
-            SceneManager.LoadScene(1);
+            Destroy(other.gameObject);
+            gameManager.SumaLlave();
+            audioSource.PlayOneShot(coinSound);
         }
+        
     }
 
     private void CheckGround()
