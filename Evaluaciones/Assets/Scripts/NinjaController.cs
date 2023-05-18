@@ -23,7 +23,7 @@ public class NinjaController : MonoBehaviour
     public AudioClip deadSound;
     GameManager gameManager;
     AudioSource audioSource;
-    bool cambio = true;
+    public bool cambio = true;
     bool estado = true;
     bool aire = false;
     int velocity = 10;
@@ -62,6 +62,11 @@ public class NinjaController : MonoBehaviour
             Morir();
             Debug.Log("se murio");
         }
+    }
+
+    public void Tecla()
+    {
+        gameManager.SaveGame2();
     }
 
     public void WalkToLeft()
@@ -103,9 +108,27 @@ public class NinjaController : MonoBehaviour
     }
     public void Portal()
     {
-        if(portal && gameManager.Llave()==1&&gameManager.Cantidad()==5)
+        //if(portal && gameManager.Llave()==1&&gameManager.Cantidad()==5)
+        if(cambio)
+            {
+                gameManager.SaveGame();
+                SceneManager.LoadScene(0);
+            }
+            else{
+                gameManager.SaveGame();
+                SceneManager.LoadScene(0);
+            }
+    }
+    public void Portal2()
+    {
+        if(portal){
+            if(cambio)
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(6);
+        }
+        else{
+            SceneManager.LoadScene(2);
+        }
         }
     }
 
@@ -242,6 +265,10 @@ public class NinjaController : MonoBehaviour
         }
 
         if(other.gameObject.name =="Portal")//cambiar escena
+        {
+            portal = true;
+        }
+        if(other.gameObject.tag =="final")//cambiar escena
         {
             portal = true;
         }

@@ -7,6 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public GameObject PersonajeH;
     public GameObject Player;
+    GameManager gameManager;
     bool cambio = true;
     void Start()
     {
@@ -19,7 +20,35 @@ public class MenuController : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(2);
+        }
+    }
+
+    public void StartGame2(){
+        if(gameManager.Cantidad()>=5)
+        {
+            if(cambio==true)
+            {
+            SceneManager.LoadScene(1);
+            }
+            else
+            {
+            SceneManager.LoadScene(2);
+            }
+        }
+    }
+
+    public void StartGame3(){
+        if(gameManager.Cantidad()>=10)
+        {
+            if(cambio==true)
+            {
+            SceneManager.LoadScene(1);
+            }
+            else
+            {
+            SceneManager.LoadScene(2);
+            }
         }
     }
 
