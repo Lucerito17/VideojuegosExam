@@ -3,7 +3,6 @@ package com.example.examen.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.examen.Clases.Anime;
-import com.example.examen.Clases.Contacto;
 import com.example.examen.R;
 import com.squareup.picasso.Picasso;
 
@@ -41,9 +39,9 @@ public class AnimeAdapter extends RecyclerView.Adapter  {
         Anime anime = item.get(position);
         View view = holder.itemView;
 
-        TextView nombre = view.findViewById(R.id.txtNombre);
-        TextView descripcion = view.findViewById(R.id.txtNumero);
-        ImageView foto = view.findViewById(R.id.imgFoto);
+        TextView nombre = view.findViewById(R.id.txtUsuario);
+        TextView descripcion = view.findViewById(R.id.txtEmail);
+        ImageView foto = view.findViewById(R.id.imgPrincipal);
         ImageView estrella = view.findViewById(R.id.btnFavorito);
 
         //mando los datos a las variable

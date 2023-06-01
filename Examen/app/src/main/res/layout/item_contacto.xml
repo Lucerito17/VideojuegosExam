@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnLlamada"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -27,13 +28,13 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripcion" />
+            android:text="Numero" />
+
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LLAMAR" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/btnFavorito"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-
 </LinearLayout>
