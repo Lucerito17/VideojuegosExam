@@ -34,6 +34,8 @@ public class EditarActivity extends AppCompatActivity {
         TextView etUsername = findViewById(R.id.etUsername);
         ImageView etFoto = findViewById(R.id.imFotoPokemon);
 
+        Button btnAtras= findViewById(R.id.btnAtras);
+
         Intent intent = getIntent();
         int temp = intent.getIntExtra("identificador", 0);
         Retrofit retrofit = new Retrofit.Builder()
@@ -55,6 +57,14 @@ public class EditarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PrincipalActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
 

@@ -58,7 +58,6 @@ public class UsersAdapter extends RecyclerView.Adapter {
 
         Button btnEditar = view.findViewById(R.id.btnEditar);
         Button btnEliminar = view.findViewById(R.id.btnEliminar);
-        Button btnAtras = view.findViewById(R.id.btnRetroceder);
 
         //mando los datos a las variable
         nombre.setText(users.nombre);
@@ -66,13 +65,6 @@ public class UsersAdapter extends RecyclerView.Adapter {
         username.setText(users.username);
         Picasso.get().load(users.foto).into(foto);
 
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PrincipalActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
