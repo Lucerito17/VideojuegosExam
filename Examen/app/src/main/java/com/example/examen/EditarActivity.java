@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.examen.entities.Users;
 import com.example.examen.services.UsersService;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,13 +29,10 @@ public class EditarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar);
 
-        EditText etNombre = findViewById(R.id.etNombre);
-        EditText etEmail = findViewById(R.id.etEmail);
-        EditText etUsername = findViewById(R.id.etUsername);
-        EditText etFoto = findViewById(R.id.etFoto);
-
-        Button btnActualizar = findViewById(R.id.btnActualizar);
-        Button btnAtras = findViewById(R.id.btnAtras);
+        TextView etNombre = findViewById(R.id.etNombre);
+        TextView etEmail = findViewById(R.id.etEmail);
+        TextView etUsername = findViewById(R.id.etUsername);
+        ImageView etFoto = findViewById(R.id.imFotoPokemon);
 
         Intent intent = getIntent();
         int temp = intent.getIntExtra("identificador", 0);
@@ -48,16 +50,15 @@ public class EditarActivity extends AppCompatActivity {
                 etNombre.setText(user.nombre);
                 etEmail.setText(user.email);
                 etUsername.setText(user.username);
-                etFoto.setText(user.foto);
+                Picasso.get().load(user.foto).into(etFoto);
             }
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
-
             }
         });
 
-        btnActualizar.setOnClickListener(new View.OnClickListener() {
+        /*btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 user.nombre = etNombre.getText().toString();
@@ -78,14 +79,6 @@ public class EditarActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
-
-        btnAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), RetrofitActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        });*/
     }
 }

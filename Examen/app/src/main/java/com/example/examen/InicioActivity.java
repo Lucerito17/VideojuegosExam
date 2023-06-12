@@ -27,7 +27,6 @@ public class InicioActivity extends AppCompatActivity {
         EditText etNombre = findViewById(R.id.etNombreInicio);
         EditText etEmail = findViewById(R.id.etEmailInicio);
         EditText etUsername = findViewById(R.id.etUsernameInicio);
-        EditText etFoto = findViewById(R.id.etFotoInicio);
 
         Button btnActualizar = findViewById(R.id.btnCrear);
         Button btnVerLista = findViewById(R.id.btnVerLista);
@@ -43,28 +42,43 @@ public class InicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Users user = new Users();
-                user.nombre = etNombre.getText().toString();
-                user.email = etEmail.getText().toString();
-                user.username = etUsername.getText().toString();
-                user.foto = etFoto.getText().toString();
 
-                Call<Void> actualizar = servicio.CrearContactos(user);
-                actualizar.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()){
-                            Log.i("MAIN_APP", "Se  creó");
-                            Intent intent = new Intent(v.getContext(), RetrofitActivity.class);
-                            v.getContext().startActivity(intent);
-                        };
-                    }
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Log.i("MAIN_APP", "No sirve");
-                    }
-                });
-                Intent intent = new Intent(v.getContext(), RetrofitActivity.class);
-                v.getContext().startActivity(intent);
+                if (etEmail.length() == 3)
+                {
+                    //nombre pokemon
+                    user.nombre = etNombre.getText().toString();
+                    //numero pokemon
+                    user.email = etEmail.getText().toString();
+                    //tipo pokemon
+                    user.username = etUsername.getText().toString();
+                    //imagen pokemon
+                    String baseUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/";
+                    String imageUrl = baseUrl + user.email + ".png";
+                    user.foto = imageUrl;
+
+                    Call<Void> actualizar = servicio.CrearContactos(user);
+                    actualizar.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()){
+                                Log.i("MAIN_APP", "Se  creó");
+                                Intent intent = new Intent(v.getContext(), RetrofitActivity.class);
+                                v.getContext().startActivity(intent);
+                            };
+                        }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.i("MAIN_APP", "No sirve");
+                        }
+                    });
+                    Intent intent = new Intent(v.getContext(), RetrofitActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+                else{
+                    Log.i("MAIN_APP", "No tiene datos completos");
+                    Intent intent = new Intent(v.getContext(), InicioActivity.class);
+                    v.getContext().startActivity(intent);
+                }
             }
         });
 
