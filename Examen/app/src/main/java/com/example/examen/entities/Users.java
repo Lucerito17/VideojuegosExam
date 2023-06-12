@@ -6,4 +6,5 @@ public class Users {
     public String email;
     public String username;
     public String foto;
+    public String camaraFoto;
 }

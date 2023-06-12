@@ -1,6 +1,7 @@
 package com.example.examen.services;
 
 import com.example.examen.entities.Users;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -27,4 +28,22 @@ public interface UsersService {
 
     @GET("Contactos/{id}")
     Call<Users> EncontrarContacto(@Path("id") int id);
+
+    @POST("image")
+    Call<ImagenResponse> SubirImagen(@Body ImageToSave image);
+
+    class ImagenResponse {
+        @SerializedName("url")
+        private String url;
+        public String getUrl() {
+            return url;
+        }
+    }
+
+    class ImageToSave{
+        String base64Image;
+        public ImageToSave(String base64Image) {
+            this.base64Image = base64Image;
+        }
+    }
 }

@@ -58,12 +58,13 @@ public class UsersAdapter extends RecyclerView.Adapter {
 
         Button btnEditar = view.findViewById(R.id.btnEditar);
         Button btnEliminar = view.findViewById(R.id.btnEliminar);
+        Button btnAnterior = view.findViewById(R.id.btnAnterior);
 
         //mando los datos a las variable
         nombre.setText(users.nombre);
         email.setText(users.email);
         username.setText(users.username);
-        Picasso.get().load(users.foto).into(foto);
+        Picasso.get().load(users.camaraFoto).into(foto);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +94,14 @@ public class UsersAdapter extends RecyclerView.Adapter {
                     public void onFailure(Call<Void> call, Throwable t) {
                     }
                 });
+            }
+        });
+
+        btnAnterior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PrincipalActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }

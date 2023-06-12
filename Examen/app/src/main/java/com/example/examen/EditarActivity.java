@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.examen.entities.Users;
 import com.example.examen.services.UsersService;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +29,10 @@ public class EditarActivity extends AppCompatActivity {
         TextView etNombre = findViewById(R.id.etNombre);
         TextView etEmail = findViewById(R.id.etEmail);
         TextView etUsername = findViewById(R.id.etUsername);
-        ImageView etFoto = findViewById(R.id.imFotoPokemon);
+        ImageView etFoto = findViewById(R.id.imFotoPokemonActualizar);
 
-        Button btnAtras= findViewById(R.id.btnAtras);
+        Button btnAtras= findViewById(R.id.btnAtrasActualizar);
+        Button btnActualizar = findViewById(R.id.btnActualizar);
 
         Intent intent = getIntent();
         int temp = intent.getIntExtra("identificador", 0);
@@ -52,7 +50,7 @@ public class EditarActivity extends AppCompatActivity {
                 etNombre.setText(user.nombre);
                 etEmail.setText(user.email);
                 etUsername.setText(user.username);
-                Picasso.get().load(user.foto).into(etFoto);
+                Picasso.get().load(user.camaraFoto).into(etFoto);
             }
 
             @Override
@@ -64,6 +62,14 @@ public class EditarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PrincipalActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ActualizarActivity.class);
                 v.getContext().startActivity(intent);
             }
         });
