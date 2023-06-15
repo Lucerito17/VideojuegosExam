@@ -53,7 +53,7 @@ public class UsersAdapter extends RecyclerView.Adapter {
 
         TextView nombre = view.findViewById(R.id.txtUsuario);
         TextView email = view.findViewById(R.id.txtEmail);
-        TextView username = view.findViewById(R.id.txtUsername);
+        //TextView username = view.findViewById(R.id.txtUsername);
         ImageView foto = view.findViewById(R.id.imgPrincipal);
 
         Button btnEditar = view.findViewById(R.id.btnEditar);

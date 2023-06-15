@@ -26,12 +26,6 @@
 
         /*
 
-        <TextView
-            android:id="@+id/txtUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Comentario" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
