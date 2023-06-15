@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EditarActivity extends AppCompatActivity {
+    double x,y;
     private Users user = new Users();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class EditarActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 user = response.body();
+                x= user.latitud;
+                y= user.longitud;
                 etNombre.setText(user.nombre);
                 //etEmail.setText(user.email);
                 //etUsername.setText(user.username);
@@ -62,9 +66,10 @@ public class EditarActivity extends AppCompatActivity {
         btnMapita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("MAIN_APP", "latitud: "+x+" longitud: "+y);
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                intent.putExtra("latitud", user.latitud);
-                intent.putExtra("longitud", user.longitud);
+                intent.putExtra("latitud", x);
+                intent.putExtra("longitud", y);
                 v.getContext().startActivity(intent);
             }
         });

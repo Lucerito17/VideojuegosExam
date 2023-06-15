@@ -3,6 +3,7 @@ package com.example.examen;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,8 +15,8 @@ import com.example.examen.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    float latitud;
-    float longitud;
+    double latitud;
+    double longitud;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
@@ -30,8 +31,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        latitud = getIntent().getFloatExtra("latitud", 0.0f);
-        longitud = getIntent().getFloatExtra("longitud", 0.0f);
+        latitud = getIntent().getDoubleExtra("latitud", 0.0f);
+        longitud = getIntent().getDoubleExtra("longitud", 0.0f);
+        Log.i("MAIN_APP", "latitud: "+latitud+" longitud: "+longitud+" maps");
     }
 
     /**
