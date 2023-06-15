@@ -62,8 +62,8 @@ public class UsersAdapter extends RecyclerView.Adapter {
 
         //mando los datos a las variable
         nombre.setText(users.nombre);
-        email.setText(users.email);
-        username.setText(users.username);
+        //email.setText(users.email);
+        //username.setText(users.username);
         Picasso.get().load(users.camaraFoto).into(foto);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {

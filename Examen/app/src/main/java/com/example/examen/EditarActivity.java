@@ -27,12 +27,13 @@ public class EditarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editar);
 
         TextView etNombre = findViewById(R.id.etNombre);
-        TextView etEmail = findViewById(R.id.etEmail);
-        TextView etUsername = findViewById(R.id.etUsername);
+        //TextView etEmail = findViewById(R.id.etEmail);
+        //TextView etUsername = findViewById(R.id.etUsername);
         ImageView etFoto = findViewById(R.id.imFotoPokemonActualizar);
 
         Button btnAtras= findViewById(R.id.btnAtrasActualizar);
         Button btnActualizar = findViewById(R.id.btnActualizar);
+        Button btnMapita = findViewById(R.id.btnMapita);
 
         Intent intent = getIntent();
         int temp = intent.getIntExtra("identificador", 0);
@@ -48,13 +49,23 @@ public class EditarActivity extends AppCompatActivity {
             public void onResponse(Call<Users> call, Response<Users> response) {
                 user = response.body();
                 etNombre.setText(user.nombre);
-                etEmail.setText(user.email);
-                etUsername.setText(user.username);
+                //etEmail.setText(user.email);
+                //etUsername.setText(user.username);
                 Picasso.get().load(user.camaraFoto).into(etFoto);
             }
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
+        btnMapita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                intent.putExtra("latitud", user.latitud);
+                intent.putExtra("longitud", user.longitud);
+                v.getContext().startActivity(intent);
             }
         });
 

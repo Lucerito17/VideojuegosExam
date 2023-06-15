@@ -25,9 +25,9 @@ public class ActualizarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar);
 
-        EditText etNombreEditar = findViewById(R.id.etNombreEditar);
-        EditText etEmailEditar = findViewById(R.id.etEmailEditar);
-        EditText etUsernameEditar = findViewById(R.id.etUsernameEditar);
+        //EditText etNombreEditar = findViewById(R.id.etNombreEditar);
+        //EditText etEmailEditar = findViewById(R.id.etEmailEditar);
+        //EditText etUsernameEditar = findViewById(R.id.etUsernameEditar);
 
         Button btnAtrasActualizar = findViewById(R.id.btnAtrasActualizar);
 
@@ -43,9 +43,9 @@ public class ActualizarActivity extends AppCompatActivity {
         btnAtrasActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.nombre = etNombreEditar.getText().toString();
-                user.email = etEmailEditar.getText().toString();
-                user.username = etUsernameEditar.getText().toString();
+                //user.nombre = etNombreEditar.getText().toString();
+                //user.email = etEmailEditar.getText().toString();
+                //user.username = etUsernameEditar.getText().toString();
 
                 Call<Users> actualizar = servicio.EditarContactos(temp, user);
                 actualizar.enqueue(new Callback<Users>() {
